@@ -31,6 +31,7 @@ public class Application {
         after((request, response) -> {// For security reasons do not forget to change "*" to url
             response.header("Access-Control-Allow-Origin", "*");
             response.header("Access-Control-Allow-Credentials", "true");
+            response.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
             response.type("application/json");
         });
 
@@ -51,7 +52,18 @@ public class Application {
             }
         }, toJson);
         post("/api/books", (request, response) -> {
-            Book book = new Book(toJson(request));
+            Book book = Book.makeBook(toJson(request));
+            try (Connection connection = AppDataSource.getTransactConnection()) {
+                List<Map<String, Object>> responseObject = queryRunner.insert(connection,
+                        "INSERT INTO book (title, author, releaseDate) VALUES (?, ?, '" + book.releaseDate + "');",
+                        new MapListHandler(), book.title, book.author);
+
+                connection.commit();
+                return responseObject;
+            }
+        }, toJson);
+        options("/api/books", (request, response) -> {
+            Book book = Book.makeBook(toJson(request));
             try (Connection connection = AppDataSource.getTransactConnection()) {
                 List<Map<String, Object>> responseObject = queryRunner.insert(connection,
                         "INSERT INTO book (title, author, releaseDate) VALUES (?, ?, '" + book.releaseDate + "');",
@@ -62,9 +74,10 @@ public class Application {
             }
         }, toJson);
 
+
         put("/api/books/:id", (request, response) -> {
             Integer id = Integer.valueOf(request.params(":id"));
-            Book book = new Book(toJson(request));
+            Book book = Book.makeBook(toJson(request));
             try (Connection connection = AppDataSource.getTransactConnection()) {
                 List<Map<String, Object>> responseObject = queryRunner.insert(connection,
                         "UPDATE book SET" +
