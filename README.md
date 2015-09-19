@@ -1,7 +1,10 @@
-# dropbox-java-spark-back
+# backbone-baby-steps-spark-server
 
-####### Goal
-Creating a simple file upload and viewing platform using different languages and frameworks
+# backend for this:
+https://github.com/OlegPahhomov/backbone-baby-steps
 
-For project and installation instructions
-https://docs.google.com/document/d/1z-aNdICUWlggCfRKotf9B_Yg_n8CMgwfR0USE7yqgFo/edit?pli=1#
+inspiration from:
+http://codebyexample.info/2012/04/29/backbone-in-baby-steps-part-2-5/
+
+
+I just thought that setting up mongo and nodejs would be too long, so I sparked it up on sparkjava.
