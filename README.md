@@ -1,6 +1,6 @@
 # backbone-baby-steps-spark-server
 
-# backend for this:
+backend for this:
 https://github.com/OlegPahhomov/backbone-baby-steps
 
 inspiration from:
