@@ -11,7 +11,7 @@ I just thought that setting up mongo and nodejs would be too long, so I sparked 
 
 # Localhost guide. 1-2min
 ###### You need postgres db
-##### 1. Change db connection in AppDataSource initLocalDbSource method
+######  1. Change db connection in AppDataSource initLocalDbSource method
 ##### 2. Make sure AppDataSource DataSource dataSource = initLocalDbSource()
 ##### 3. Run Migration.java class main method
 ##### 4. Make sure Application.java is on port(8081)
