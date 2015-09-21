@@ -1,3 +1,4 @@
+import config.AppDataSource;
 import org.flywaydb.core.Flyway;
 
 public class Migration {
@@ -9,6 +10,7 @@ public class Migration {
             //flyway.setDataSource(AppDataSource.getDatasource());
             String user = "tiksmuyqdctiyq";
             String password = "okiquQB9YLY-XaoMoKEVuaVNSC";
+            flyway.setDataSource(AppDataSource.getDatasource());
             flyway.clean();
             flyway.migrate();
         }
