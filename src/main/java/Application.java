@@ -16,6 +16,8 @@ import static spark.Spark.*;
 
 public class Application {
 
+    public static final String API_BOOKS = "/api/books";
+    public static final String API_BOOKS_ID = "/api/books/:id";
     static ResponseTransformer toJson = new Gson()::toJson;
     static QueryRunner queryRunner = new QueryRunner();
     static JsonParser jsonParser = new JsonParser();
@@ -24,33 +26,33 @@ public class Application {
     }
 
     public static void main(String[] args) throws SQLException {
-        port(8081);
+        port(getHerokuAssignedPort());
+        //port(8081);
 
         start();
 
-        after((request, response) -> {// For security reasons do not forget to change "*" to url
-            response.header("Access-Control-Allow-Origin", "http://localhost:63342");
-            response.header("Access-Control-Allow-Credentials", "true");
+        after((request, response) -> {
+            response.header("Access-Control-Allow-Origin", "*");
+            response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            response.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             response.type("application/json");
         });
 
-        after("/picture/:id", (request, response) -> response.type("image/jpg"));
-        after("/picture/small/:id", (request, response) -> response.type("image/jpg"));
     }
 
     private static void start() throws SQLException {
-        get("/api/books", (request, response) -> {
+        get(API_BOOKS, (request, response) -> {
             try (Connection connection = AppDataSource.getConnection()) {
                 return queryRunner.query(connection, "SELECT * FROM BOOK", new MapListHandler());
             }
         }, toJson);
-        get("/api/books/:id", (request, response) -> {
+        get(API_BOOKS_ID, (request, response) -> {
             Integer id = Integer.valueOf(request.params(":id"));
             try (Connection connection = AppDataSource.getConnection()) {
                 return queryRunner.query(connection, "SELECT * FROM BOOK where id=?", new MapListHandler(), id);
             }
         }, toJson);
-        post("/api/books", (request, response) -> {
+        post(API_BOOKS, (request, response) -> {
             Book book = Book.makeBook(toJson(request));
             try (Connection connection = AppDataSource.getTransactConnection()) {
                 List<Map<String, Object>> responseObject = queryRunner.insert(connection,
@@ -61,20 +63,10 @@ public class Application {
                 return responseObject;
             }
         }, toJson);
-        /*options("/api/books", (request, response) -> {
-            Book book = Book.makeBook(toJson(request));
-            try (Connection connection = AppDataSource.getTransactConnection()) {
-                List<Map<String, Object>> responseObject = queryRunner.insert(connection,
-                        "INSERT INTO book (title, author, releaseDate) VALUES (?, ?, '" + book.releaseDate + "');",
-                        new MapListHandler(), book.title, book.author);
 
-                connection.commit();
-                return responseObject;
-            }
-        }, toJson);*/
+        options("/*", (request, response) -> "*");
 
-
-        put("/api/books/:id", (request, response) -> {
+        put(API_BOOKS_ID, (request, response) -> {
             Integer id = Integer.valueOf(request.params(":id"));
             Book book = Book.makeBook(toJson(request));
             try (Connection connection = AppDataSource.getTransactConnection()) {
@@ -91,14 +83,22 @@ public class Application {
             }
         }, toJson);
 
-        delete("/api/books/:id", (request, response) -> {
+        delete(API_BOOKS_ID, (request, response) -> {
             Integer id = Integer.valueOf(request.params(":id"));
             try (Connection connection = AppDataSource.getTransactConnection()) {
                 queryRunner.update(connection, "DELETE FROM BOOK where id=?", id);
                 connection.commit();
-                return "success";
+                return "";
             }
         }, toJson);
+    }
+
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567;
     }
 
     private static JsonObject toJson(Request request) {

@@ -97,7 +97,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>Main</mainClass>
+                            <mainClass>Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -116,6 +116,7 @@
                     </processTypes>
                 </configuration>
             </plugin>
+            <!--mvn flyway plugin-->
             <!--<plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
