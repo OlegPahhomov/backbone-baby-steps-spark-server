@@ -17,7 +17,7 @@ public class AppDataSource {
         PGPoolingDataSource dataSource = new PGPoolingDataSource();
         dataSource.setUser("tiksmuyqdctiyq");
         dataSource.setPassword("okiquQB9YLY-XaoMoKEVuaVNSC");
-        dataSource.setServerName("@ec2-54-197-253-142.compute-1.amazonaws.com");
+        dataSource.setServerName("ec2-54-197-253-142.compute-1.amazonaws.com");
         dataSource.setDatabaseName("dbcanrndvorfiu");
         return dataSource;
     }

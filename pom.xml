@@ -111,7 +111,7 @@
                     <appName>morning-coast-1696</appName>
                     <processTypes>
                         <!-- Tell Heroku how to launch your application -->
-                        <web>java -jar ./target/my-app-1.0-jar-with-dependencies.jar</web>
+                        <web>java -jar ./target/backbone-baby-steps-spark-server-1.0-SNAPSHOT-jar-with-dependencies.jar</web>
                         <migrate>java -cp "target/dependency/*":target/classes Migration</migrate>
                     </processTypes>
                 </configuration>
