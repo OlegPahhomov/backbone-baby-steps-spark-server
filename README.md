@@ -10,7 +10,7 @@ I just thought that setting up mongo and nodejs would be too long, so I sparked 
 
 
 # Localhost guide. 1-2min
-##### You need postgres db
+###### You need postgres db
 ##### 1. Change db connection in AppDataSource initLocalDbSource method
 ##### 2. Make sure AppDataSource DataSource dataSource = initLocalDbSource()
 ##### 3. Run Migration.java class main method
@@ -18,7 +18,7 @@ I just thought that setting up mongo and nodejs would be too long, so I sparked 
 ##### 5. Run Application.java
 
 
-Heroku guide. 5-15min
+# Heroku guide. 5-15min
 ##### You need heroku account and heroku toolbelt. If you're new I recommend checking out couple first points of https://devcenter.heroku.com/articles/getting-started-with-java#introduction
 ##### I understand you cannot do everything 1:1, but bear with me.
 ##### 1. You have installed git repo and you have created heroku app.
