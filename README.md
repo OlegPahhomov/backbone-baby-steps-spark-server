@@ -21,7 +21,7 @@ I just thought that setting up mongo and nodejs would be too long, so I sparked 
 ## Heroku guide. 5-15min
 ###### You need heroku account and heroku toolbelt. If you're new I recommend checking out couple first points of https://devcenter.heroku.com/articles/getting-started-with-java#introduction
 ###### I understand you cannot do everything 1:1, but bear with me.
-###### 1. You have installed git repo and you have created heroku app.
+###### 1. You have installed git repo and you have created heroku app. All command are from project folder
 ###### 2. Type "heroku config" it will give you DATABASE_URL it's postgres://[username]:[password]@[servername]:[port]/[databasename]
 ###### 3. Fill AppDataSource initHerokuDbsource() method with appropriate data and make sure that Datasource dataSource = initHerokuDatasource()
 ###### 4. Make sure Application.java main method uses: port(getHerokuAssignedPort())
