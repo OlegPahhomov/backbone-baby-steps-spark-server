@@ -108,14 +108,14 @@
                 <version>0.4.4</version>
                 <configuration>
                     <jdkVersion>1.8</jdkVersion>
-                    <appName>spark-heroku-example22</appName>
+                    <appName>morning-coast-1696</appName>
                     <processTypes>
                         <!-- Tell Heroku how to launch your application -->
                         <web>java -jar ./target/my-app-1.0-jar-with-dependencies.jar</web>
                     </processTypes>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>3.2.1</version>
@@ -123,13 +123,13 @@
                     <driver>org.postgresql.Driver</driver>
                     <url>jdbc:postgresql://localhost:5432</url>
                     <user>postgres</user>
-                    <!--<password>${postgres.password.home}</password>-->
+                    &lt;!&ndash;<password>${postgres.password.home}</password>&ndash;&gt;
                     <password>${postgres.password.office}</password>
                     <schemas>
                         <schema>public</schema>
                     </schemas>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 
