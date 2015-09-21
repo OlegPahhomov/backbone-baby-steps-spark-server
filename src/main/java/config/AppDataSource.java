@@ -2,6 +2,7 @@ package config;
 
 import org.postgresql.ds.PGPoolingDataSource;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -18,6 +19,10 @@ public class AppDataSource {
 //        dataSource.setPassword(HOME_PW);
         dataSource.setPassword(OFFICE_PW);
         dataSource.setServerName("localhost");
+    }
+
+    public static DataSource getDatasource() {
+        return dataSource;
     }
 
     public static Connection getConnection() throws SQLException {

@@ -29,9 +29,8 @@ public class Application {
         start();
 
         after((request, response) -> {// For security reasons do not forget to change "*" to url
-            response.header("Access-Control-Allow-Origin", "*");
+            response.header("Access-Control-Allow-Origin", "http://localhost:63342");
             response.header("Access-Control-Allow-Credentials", "true");
-            response.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
             response.type("application/json");
         });
 
@@ -62,7 +61,7 @@ public class Application {
                 return responseObject;
             }
         }, toJson);
-        options("/api/books", (request, response) -> {
+        /*options("/api/books", (request, response) -> {
             Book book = Book.makeBook(toJson(request));
             try (Connection connection = AppDataSource.getTransactConnection()) {
                 List<Map<String, Object>> responseObject = queryRunner.insert(connection,
@@ -72,7 +71,7 @@ public class Application {
                 connection.commit();
                 return responseObject;
             }
-        }, toJson);
+        }, toJson);*/
 
 
         put("/api/books/:id", (request, response) -> {
