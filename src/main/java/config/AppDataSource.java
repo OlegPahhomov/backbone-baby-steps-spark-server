@@ -7,8 +7,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class AppDataSource {
-    //private static DataSource dataSource = initLocalDbSource();
-    private static DataSource dataSource = initHerokuDbsource();
+    private static DataSource dataSource = initLocalDbSource();
+//    private static DataSource dataSource = initHerokuDbsource();
     public static final String HOME_PW = "12345";
     public static final String OFFICE_PW = "postgres";
 
@@ -24,7 +24,7 @@ public class AppDataSource {
 
     private static DataSource initLocalDbSource() {
         PGPoolingDataSource dataSource = new PGPoolingDataSource();
-        dataSource.setDatabaseName("postgres");
+        dataSource.setDatabaseName("library");
         dataSource.setUser("postgres");
 //        dataSource.setPassword(HOME_PW);
         dataSource.setPassword(OFFICE_PW);

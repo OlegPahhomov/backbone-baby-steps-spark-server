@@ -26,8 +26,8 @@ public class Application {
     }
 
     public static void main(String[] args) throws SQLException {
-        port(getHerokuAssignedPort());
-        //port(8081);
+        //port(getHerokuAssignedPort());
+        port(8081);
 
         start();
 
@@ -60,7 +60,7 @@ public class Application {
                         new MapListHandler(), book.title, book.author);
 
                 connection.commit();
-                return responseObject;
+                return responseObject.get(0);
             }
         }, toJson);
 
@@ -79,7 +79,7 @@ public class Application {
                         new MapListHandler(), book.title, book.author, id);
 
                 connection.commit();
-                return responseObject;
+                return responseObject.get(0);
             }
         }, toJson);
 
